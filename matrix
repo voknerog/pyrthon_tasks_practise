@@ -1,0 +1,34 @@
+Write a program that raises a square matrix to the mm-th power.
+
+Input data format
+The input to the program is a natural number nn — the number of rows and columns in the matrix, then the elements of the matrix, then the natural number mm.
+
+Output format
+The program should output the resulting matrix, separating the elements with a space character.
+
+Напишите программу, которая возводит квадратную матрицу в mm-ую степень.
+
+Формат входных данных
+На вход программе подаётся натуральное число nn — количество строк и столбцов в матрице, затем элементы матрицы, затем натуральное число mm.
+
+Формат выходных данных
+Программа должна вывести результирующую матрицу, разделяя элементы символом пробела.
+
+n = int(input())
+a = [list(map(int, list(input().split()))) for _ in range(n)]
+m = int(input())
+
+def multi(a, b):
+    n = len(a)
+    b = list(zip(*b))
+    return [[sum([a[i][r] * b[j][r] for r in range(n)]) for j in range(n)] for i in range(n)]
+
+def expo(a, m):
+    c = list(a)
+    for _ in range(m-1):
+        c = multi(c, a)
+    return c
+
+result = expo(a, m)
+
+[print(*row) for row in result]
