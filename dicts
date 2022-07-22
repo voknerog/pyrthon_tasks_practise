@@ -1,0 +1,40 @@
+Напишите программу для подсчета количества единиц каждого вида товара из приобретенных каждым покупателем интернет-магазина.
+
+Формат входных данных
+На вход программе подается число nn — количество строк в базе данных о продажах интернет-магазина. Далее следует nn строк с записями вида покупатель товар количество,
+где покупатель — имя покупателя (строка без пробелов), товар — название товара (строка без пробелов), количество — количество приобретенных единиц товара (натуральное
+число).
+
+Формат выходных данных
+Программа должна вывести список всех покупателей в лексикографическом порядке, после имени каждого покупателя — двоеточие, затем список названий всех приобретенных
+им товаров в лексикографическом порядке, после названия каждого товара — количество единиц товара. Информация о каждом товаре выводится на отдельной строке.
+
+Write a program to count the number of units of each type of product purchased by each customer of an online store.
+
+Input data format
+The input to the program is the number nn — the number of rows in the online store's sales database. 
+This is followed by nn lines with records of the type buyer product quantity, where buyer is the name of the buyer (string without spaces),
+product is the name of the product (string without spaces), quantity is the number of purchased units of the product (natural number).
+
+Output format
+The program should output a list of all customers in lexicographic order, followed by a colon after each customer's name,
+then a list of the names of all the items they purchased in lexicographic order, followed by the number of units of the item after each item name.
+Information about each product is displayed on a separate line.
+
+
+
+l = [input().split() for _ in range(int(input()))]
+buys = {}
+for i in l:
+    if buys.get(i[0]):
+        if buys[i[0]].get(i[1]):
+            buys[i[0]][i[1]] += int(i[2])
+            continue
+    buys.setdefault(i[0], {})[i[1]] = int(i[2])
+result = sorted(buys)
+
+for i in result:
+    print(f'{i}:')
+    s_result = sorted(buys[i])
+    for j in s_result:
+        print(j, buys[i][j])
